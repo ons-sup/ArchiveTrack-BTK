@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTK ArchiveTrack</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="assets/btk-logo.png" alt="BTK Bank" class="brand-logo">
+      <div class="brand-text">
+        <strong>BTK</strong> ArchiveTrack
+        <span>Banque Tuniso-Koweïtienne</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9zm0 7h6v-5H4v5zm10 0h6V11h-6v9zm0-16v5h6V4h-6z"/></svg>
+        Tableau de bord
+      </a>
+      <a href="#" class="nav-item" data-page="search">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.5 19l-5-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+        Rechercher un dossier
+      </a>
+      <a href="#" class="nav-item" data-page="checkout">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8 17H6v-7h2zm4 0h-2V7h2zm4 0h-2v-4h2z"/></svg>
+        Sortir un dossier
+      </a>
+      <a href="#" class="nav-item" data-page="return">
+        <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+        Retourner un dossier
+      </a>
+      <a href="#" class="nav-item" data-page="history">
+        <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 1 1 2.05 4.95l-1.42 1.42A9 9 0 1 0 13 3zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"/></svg>
+        Historique
+      </a>
+      <a href="#" class="nav-item" data-page="missing">
+        <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2zm0-4h-2v-4h2z"/></svg>
+        Dossiers introuvables
+      </a>
+      <a href="#" class="nav-item" data-page="reports">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8 17H6v-5h2zm4 0h-2V7h2zm4 0h-2v-3h2z"/></svg>
+        Rapports
+      </a>
+      <a href="#" class="nav-item" data-page="settings">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.5.5 0 0 0 .12-.61l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.03 7.03 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.5.5 0 0 0-.6.22L1.63 8.87a.5.5 0 0 0 .12.61l2.03 1.58c-.05.3-.08.63-.08.94s.02.64.07.94l-2.03 1.58a.5.5 0 0 0-.12.61l1.92 3.32c.14.24.4.32.6.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.61zM12 15.5A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5z"/></svg>
+        Paramètres
+      </a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="avatar">AJ</div>
+      <div>
+        <strong id="currentUserName">Ali Jerbi</strong>
+        <span>Employé</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 id="pageTitle">Tableau de bord</h1>
+        <p class="breadcrumb" id="pageBreadcrumb">Accueil</p>
+      </div>
+      <div class="topbar-right">
+        <span id="clock" class="clock"></span>
+        <button class="bell-btn" id="notifBtn" title="Dossiers introuvables non résolus">
+          <svg viewBox="0 0 24 24"><path d="M12 22a2.4 2.4 0 0 0 2.4-2.4h-4.8A2.4 2.4 0 0 0 12 22zm7.2-6V11c0-3.53-1.87-6.48-5.16-7.27V3a2.04 2.04 0 1 0-4.08 0v.73C6.68 4.52 4.8 7.46 4.8 11v5l-2 2v1h16.8v-1z"/></svg>
+          <span class="bell-badge" id="notifCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ---------- DASHBOARD ---------- -->
+      <section class="page active" id="page-dashboard">
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8 17H6v-7h2zm4 0h-2V7h2zm4 0h-2v-4h2z"/></svg>
+            </div>
+            <div>
+              <span class="stat-label">Nombre total</span>
+              <h2 id="statTotal">0</h2>
+              <span class="stat-sub">dossiers</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+            </div>
+            <div>
+              <span class="stat-label">Disponibles</span>
+              <h2 id="statAvailable">0</h2>
+              <span class="stat-sub">dossiers</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange">
+              <svg viewBox="0 0 24 24"><path d="M12 2 2 22h20zm1 15h-2v-2h2zm0-4h-2V9h2z"/></svg>
+            </div>
+            <div>
+              <span class="stat-label">Sortis</span>
+              <h2 id="statOut">0</h2>
+              <span class="stat-sub">dossiers</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2zm0-4h-2v-4h2z"/></svg>
+            </div>
+            <div>
+              <span class="stat-label">Introuvables</span>
+              <h2 id="statMissing">0</h2>
+              <span class="stat-sub">dossiers</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Rechercher un dossier</h2>
+          <div class="field-row">
+            <input id="dashSearchInput" placeholder="Entrez le code client ou le nom du client">
+            <button class="btn-primary" onclick="dashboardSearch()">Rechercher</button>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <a href="#" class="quick-card" data-page="checkout">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8 17H6v-7h2zm4 0h-2V7h2zm4 0h-2v-4h2z"/></svg>
+            <div><strong>Sortir un dossier</strong><span>Enregistrer la sortie d'un dossier</span></div>
+          </a>
+          <a href="#" class="quick-card" data-page="return">
+            <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+            <div><strong>Retourner un dossier</strong><span>Enregistrer le retour d'un dossier</span></div>
+          </a>
+          <a href="#" class="quick-card" data-page="history">
+            <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 1 1 2.05 4.95l-1.42 1.42A9 9 0 1 0 13 3zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8z"/></svg>
+            <div><strong>Historique</strong><span>Consulter l'historique des mouvements</span></div>
+          </a>
+          <a href="#" class="quick-card" data-page="missing">
+            <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2zm0-4h-2v-4h2z"/></svg>
+            <div><strong>Dossiers introuvables</strong><span>Voir la liste des dossiers signalés</span></div>
+          </a>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Dernières activités</h2>
+            <a href="#" class="link" data-page="history">Voir tout &rarr;</a>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Code client</th><th>Nom</th><th>Action</th><th>Employé</th><th>Date</th></tr></thead>
+              <tbody id="recentActivityTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- RECHERCHER ---------- -->
+      <section class="page" id="page-search">
+        <div class="panel">
+          <h2>Rechercher un dossier</h2>
+          <div class="field-row">
+            <input id="searchInput" placeholder="Code client ou nom">
+            <button class="btn-primary" onclick="performSearch()">Rechercher</button>
+          </div>
+        </div>
+        <div id="searchResults"></div>
+      </section>
+
+      <!-- ---------- SORTIR ---------- -->
+      <section class="page" id="page-checkout">
+        <div class="panel">
+          <h2>Informations du dossier</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label>Code client</label>
+              <input id="outCode" placeholder="Ex : 0612567" onblur="fillNameFromCode('outCode','outNom')">
+            </div>
+            <div class="field">
+              <label>Nom complet</label>
+              <input id="outNom" placeholder="Nom du client" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Informations de sortie</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label>Employé *</label>
+              <select id="outEmploye"></select>
+            </div>
+            <div class="field">
+              <label>Date de sortie</label>
+              <input type="date" id="outDate">
+            </div>
+          </div>
+          <div class="field">
+            <label>Motif *</label>
+            <textarea id="outMotif" placeholder="Ex : Consultation pour traitement de demande de crédit"></textarea>
+          </div>
+          <div class="actions-row">
+            <button class="btn-ghost" onclick="resetCheckoutForm()">Annuler</button>
+            <button class="btn-primary" onclick="submitCheckout()">Valider la sortie</button>
+          </div>
+          <p class="form-message" id="checkoutMessage"></p>
+        </div>
+      </section>
+
+      <!-- ---------- RETOURNER ---------- -->
+      <section class="page" id="page-return">
+        <div class="panel">
+          <h2>Informations du dossier</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label>Code client</label>
+              <input id="retCode" placeholder="Ex : 0612567" onblur="fillReturnInfo()">
+            </div>
+            <div class="field">
+              <label>Nom complet</label>
+              <input id="retNom" placeholder="Nom du client" readonly>
+            </div>
+            <div class="field">
+              <label>Date de sortie</label>
+              <input id="retDateSortie" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Informations de retour</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label>Employé *</label>
+              <select id="retEmploye"></select>
+            </div>
+            <div class="field">
+              <label>Date de retour</label>
+              <input type="date" id="retDate">
+            </div>
+          </div>
+          <div class="field">
+            <label>Observation</label>
+            <textarea id="retObservation" placeholder="Ex : Dossier complet et en bon état."></textarea>
+          </div>
+          <div class="actions-row">
+            <button class="btn-ghost" onclick="resetReturnForm()">Annuler</button>
+            <button class="btn-primary" onclick="submitReturn()">Confirmer le retour</button>
+          </div>
+          <p class="form-message" id="returnMessage"></p>
+        </div>
+      </section>
+
+      <!-- ---------- HISTORIQUE ---------- -->
+      <section class="page" id="page-history">
+        <div class="panel">
+          <h2>Historique des mouvements</h2>
+          <div class="filter-row">
+            <div class="field">
+              <label>Code client ou nom</label>
+              <input id="histFilterQuery" placeholder="Rechercher...">
+            </div>
+            <div class="field">
+              <label>Action</label>
+              <select id="histFilterAction">
+                <option value="">Toutes</option>
+                <option value="Sortie">Sortie</option>
+                <option value="Retour">Retour</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Date du</label>
+              <input type="date" id="histFilterFrom">
+            </div>
+            <div class="field">
+              <label>au</label>
+              <input type="date" id="histFilterTo">
+            </div>
+            <button class="btn-primary" onclick="renderHistory()">Filtrer</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Code client</th><th>Nom</th><th>Action</th><th>Employé</th><th>Date</th><th>Observation</th></tr></thead>
+              <tbody id="historyTable"></tbody>
+            </table>
+            <p class="empty-state" id="historyEmpty">Aucun mouvement trouvé.</p>
+          </div>
+          <div class="pagination" id="historyPagination"></div>
+        </div>
+      </section>
+
+      <!-- ---------- INTROUVABLES ---------- -->
+      <section class="page" id="page-missing">
+        <div class="panel">
+          <h2>Signaler un dossier introuvable</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label>Code client *</label>
+              <input id="missCode" placeholder="Ex : 0612567">
+            </div>
+            <div class="field">
+              <label>Observation *</label>
+              <input id="missObservation" placeholder="Décrivez les détails...">
+            </div>
+          </div>
+          <div class="actions-row">
+            <button class="btn-danger" onclick="reportMissing()">Signaler</button>
+          </div>
+          <p class="form-message" id="missMessage"></p>
+        </div>
+
+        <div class="panel">
+          <h2>Liste des dossiers introuvables</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Code client</th><th>Nom</th><th>Date du signalement</th><th>Signalé par</th><th>Observation</th><th>Statut</th></tr></thead>
+              <tbody id="missingTable"></tbody>
+            </table>
+            <p class="empty-state" id="missingEmpty">Aucun dossier introuvable signalé.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- RAPPORTS ---------- -->
+      <section class="page" id="page-reports">
+        <div class="panel">
+          <h2>Résumé des mouvements</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Action</th><th>Nombre</th></tr></thead>
+              <tbody id="reportSummaryTable"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Répartition par boîte</h2>
+          <div id="reportBoxChart" class="bar-chart"></div>
+        </div>
+        <div class="panel">
+          <h2>Exporter</h2>
+          <p>Téléchargez l'ensemble des dossiers au format CSV.</p>
+          <button class="btn-primary" onclick="exportCsv()">Exporter les dossiers (CSV)</button>
+        </div>
+      </section>
+
+      <!-- ---------- PARAMETRES ---------- -->
+      <section class="page" id="page-settings">
+        <div class="panel">
+          <h2>Profil employé</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label>Nom de l'employé connecté</label>
+              <input id="settingsUserName" placeholder="Ex : Ali Jerbi">
+            </div>
+          </div>
+          <button class="btn-primary" onclick="saveSettings()">Enregistrer</button>
+          <p class="form-message" id="settingsMessage"></p>
+        </div>
+
+        <div class="panel">
+          <h2>Gestion des employés</h2>
+          <div class="field-row">
+            <input id="newEmployeeName" placeholder="Nom du nouvel employé">
+            <button class="btn-primary" onclick="addEmployee()">Ajouter</button>
+          </div>
+          <ul class="employee-list" id="employeeList"></ul>
+        </div>
+
+        <div class="panel">
+          <h2>Zone de danger</h2>
+          <p>Réinitialiser toutes les données de l'application (dossiers, mouvements, signalements).</p>
+          <button class="btn-danger" onclick="resetAllData()">Réinitialiser les données</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ---------- MODALE DETAIL DOSSIER ---------- -->
+<div class="modal-overlay" id="dossierModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeDossierModal()">&times;</button>
+    <h2>Dossier</h2>
+    <p class="breadcrumb">Accueil &rsaquo; Rechercher un dossier &rsaquo; Dossier</p>
+    <div class="panel">
+      <h3>Informations du dossier</h3>
+      <div class="detail-grid">
+        <div><label>Code client</label><strong id="modalCode"></strong></div>
+        <div><label>Nom complet</label><strong id="modalNom"></strong></div>
+        <div><label>Boîte attendue</label><strong id="modalBoite"></strong></div>
+        <div><label>Date d'archivage</label><strong id="modalDate"></strong></div>
+        <div><label>Statut</label><span id="modalStatut" class="badge"></span></div>
+      </div>
+      <div class="actions-row">
+        <button class="btn-success" id="modalCheckoutBtn" onclick="goToCheckoutFromModal()">Sortir le dossier</button>
+        <button class="btn-primary" id="modalReturnBtn" onclick="goToReturnFromModal()">Retourner le dossier</button>
+        <button class="btn-danger" onclick="goToMissingFromModal()">Signaler introuvable</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Dernier mouvement</h3>
+      <div id="modalLastMovement" class="last-movement">Aucun mouvement enregistré.</div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
